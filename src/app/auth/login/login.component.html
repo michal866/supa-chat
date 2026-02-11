@@ -1,0 +1,57 @@
+<div class="wrapper">
+  <header class="form-header">
+    <h2>Welcome back</h2>
+  </header>
+
+  <form
+    ngNativeValidate
+    class="login-form"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSignIn()"
+  >
+    <mat-form-field appearance="outline" hideRequiredMarker floatLabel="always">
+      <mat-label>Enter your email</mat-label>
+      <input
+        type="email"
+        name="email"
+        autocomplete="email"
+        matInput
+        formControlName="email"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
+      <mat-label>Enter your password</mat-label>
+      <input
+        id="current-password"
+        autocomplete="current-password"
+        minlength="6"
+        required
+        matInput
+        formControlName="password"
+        [type]="hidePassword() ? 'password' : 'text'"
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword()"
+        (click)="togglePasswordVisibility()"
+      >
+        <mat-icon>{{
+          hidePassword() ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button type="submit" mat-flat-button [disabled]="loading()">
+      {{ loading() ? "Logging in..." : "Login" }}
+    </button>
+    <div class="auth-help">
+      <a mat-button [routerLink]="['/login-help']">Forgot password?</a>
+      <a mat-button [routerLink]="['/passwordless']">Passwordless sign in</a>
+    </div>
+  </form>
+  <a mat-button [routerLink]="['/register']">Create new account</a>
+</div>

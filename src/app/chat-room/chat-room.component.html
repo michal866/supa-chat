@@ -1,0 +1,189 @@
+<mat-sidenav-container class="sidenav-wrapper">
+  <mat-sidenav
+    #roomListSidenav
+    role="navigation"
+    class="room-list-sidenav"
+    [mode]="handsetPortrait() ? 'over' : 'side'"
+    [opened]="!handsetPortrait()"
+  >
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openUserSettingsDialog()">
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <button mat-menu-item (click)="onLogOut()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Log out</span>
+      </button>
+    </mat-menu>
+
+    <mat-list>
+      <a mat-list-item [matMenuTriggerFor]="menu">
+        <img
+          matListItemAvatar
+          [src]="extraUserInfo()?.avatar_url"
+          [alt]="currentUser()?.user_metadata?.['display_name'] + '\'s avatar'"
+        />
+        <p matListItemTitle>
+          {{ currentUser()?.user_metadata?.["display_name"] }}
+        </p>
+      </a>
+    </mat-list>
+
+    <div>
+      <button mat-flat-button (click)="openCreateRoomDialog()">
+        Create new room
+      </button>
+    </div>
+
+    <mat-nav-list>
+      @for (channel of channels(); track channel.id) {
+        <a
+          #link="routerLinkActive"
+          class="room-nav-list-item"
+          mat-list-item
+          [activated]="link.isActive"
+          [routerLinkActive]="'active'"
+          [routerLink]="['/chat', channel.id]"
+          (click)="onChangeRoom()"
+        >
+          <img
+            matListItemAvatar
+            [src]="channel.channel_avatar_url"
+            [alt]="channel.slug + '\'s avatar'"
+          />
+          <h3 matListItemTitle>{{ channel.slug }}</h3>
+          <p matListItemLine>
+            <span>{{ "Sender: " + "last msg" }}</span>
+          </p>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav
+    #roomInfoSidenav
+    class="room-info-sidenav"
+    role="TODO"
+    [position]="'end'"
+    [mode]="handsetPortrait() ? 'over' : 'side'"
+  >
+  </mat-sidenav>
+
+  <mat-sidenav-content role="main">
+    <div class="conversation">
+      <mat-toolbar>
+        <button
+          mat-icon-button
+          aria-label="Example icon-button with menu icon"
+          (click)="roomListSidenav.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="toolbar-spacer"></span>
+        <button
+          mat-icon-button
+          aria-label="Example icon-button with info icon"
+          (click)="roomInfoSidenav.toggle()"
+        >
+          <mat-icon>info</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div #messageList class="message-list-scrollable">
+        @if (messagesError()) {
+          {{ "Error: " + messagesError() }}
+        }
+
+        @for (message of messages(); track message.id; let last = $last) {
+          <div
+            class="message-with-username-container"
+            [class]="{ 'last-msg': last }"
+          >
+            <div
+              class="message-bubble-container"
+              [style.align-self]="
+                message.user_id === currentUser()?.id
+                  ? 'flex-end'
+                  : 'flex-start'
+              "
+            >
+              @if (
+                message.user_id !== currentUser()?.id && !message.sameSender
+              ) {
+                <p class="username-above-bubble">
+                  {{ message.user_id }}
+                </p>
+              }
+
+              @if (message.content) {
+                <div
+                  class="text-message-bubble"
+                  [class]="
+                    message.user_id === currentUser()?.id
+                      ? 'message-bubble-self'
+                      : 'message-bubble-incoming'
+                  "
+                >
+                  <div class="text-message-wrapper">
+                    <p class="message-text">
+                      {{ message.content }}
+                    </p>
+
+                    <p class="message-timestamp">
+                      {{ message.inserted_at | date: "dd.LL.yyyy, HH:mm" }}
+                    </p>
+                  </div>
+                </div>
+              }
+
+              @if (message.fileUrl) {
+                <div class="picture-message-bubble">
+                  <img alt="" [src]="message.fileUrl" />
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <div #afterLastMsg id="anchor"></div>
+      </div>
+
+      <div class="file-text-fields-wrapper">
+        <div>
+          <button
+            class="upload-files-btn"
+            mat-icon-button
+            type="button"
+            aria-label="TODO"
+            (click)="openFileUploadDialog()"
+          >
+            <mat-icon>cloud_upload</mat-icon>
+          </button>
+        </div>
+
+        <form autocomplete="off" (ngSubmit)="onSendMsg()">
+          <mat-form-field
+            class="text-msg-form-field"
+            appearance="outline"
+            subscriptSizing="dynamic"
+          >
+            <input
+              matInput
+              placeholder="Message"
+              [formControl]="textMessageField"
+            />
+            <button
+              matSuffix
+              class="send-text-btn"
+              mat-icon-button
+              type="submit"
+              aria-label="TODO"
+            >
+              <mat-icon>send</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

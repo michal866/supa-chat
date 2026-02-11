@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Create new room</h2>
+
+<!-- <mat-dialog-content>
+  <div class="container">
+    <form [formGroup]="newRoomForm">
+      <mat-form-field
+        appearance="outline"
+        hideRequiredMarker
+        floatLabel="always"
+        disabled
+      >
+        <mat-label>New room name</mat-label>
+        <input
+          type="text"
+          name="new-room-name"
+          formControlName="newRoomName"
+          matInput
+        />
+      </mat-form-field>
+
+      <mat-form-field
+        class="file-upload-form-field"
+        appearance="outline"
+        subscriptSizing="dynamic"
+        disabled
+      >
+        <mat-label>Drop files here!</mat-label>
+        <ngx-mat-dropzone>
+          <input
+            type="file"
+            fileInput
+            formControlName="newRoomImg"
+            [accept]="'image/*'"
+          />
+          @if (newRoomForm.value.newRoomImg; as img) {
+            <p>{{ img }}</p>
+            {{ "test" }}
+            <img [src]="img" [alt]="" />
+          } @else {
+            <p>No room picture selected</p>
+          }
+        </ngx-mat-dropzone>
+      </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content> -->
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="onCreateRoom()">Create new room</button>
+</mat-dialog-actions>

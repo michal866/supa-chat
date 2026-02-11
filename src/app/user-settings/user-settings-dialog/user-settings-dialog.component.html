@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>User preferences</h2>
+
+<mat-dialog-content>
+  <form
+    class="form-widget"
+    [formGroup]="updateProfileForm"
+    (ngSubmit)="updateProfile()"
+  >
+    <div>
+      <label for="email">Email</label>
+      <input
+        formControlName="email"
+        type="email"
+        name="email"
+        autocomplete="email"
+        id="email"
+      />
+    </div>
+    <div>
+      <label for="username">Username</label>
+      <input formControlName="username" id="username" type="text" />
+    </div>
+
+    <div>
+      <button type="submit" mat-flat-button [disabled]="loading()">
+        {{ loading() ? "Loading ..." : "Update" }}
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

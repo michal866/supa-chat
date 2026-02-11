@@ -1,0 +1,35 @@
+<div class="wrapper">
+  <header class="form-header">
+    <h2>Reset your password</h2>
+  </header>
+
+  <form
+    ngNativeValidate
+    class="login-help-form"
+    [formGroup]="emailForm"
+    (ngSubmit)="onSendPasswordResetEmail()"
+  >
+    <mat-form-field appearance="outline" hideRequiredMarker floatLabel="always">
+      <mat-label>Enter your email</mat-label>
+      <input
+        type="email"
+        name="email"
+        autocomplete="email"
+        matInput
+        formControlName="email"
+        required
+      />
+    </mat-form-field>
+
+    <div class="form-buttons">
+      <button
+        id="password-reset"
+        type="submit"
+        mat-flat-button
+        [disabled]="loading()"
+      >
+        {{ loading() ? "Sending..." : "Reset Password" }}
+      </button>
+    </div>
+  </form>
+</div>

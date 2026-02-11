@@ -1,0 +1,76 @@
+<div class="wrapper">
+  <header class="form-header">
+    <h2>Create new account</h2>
+  </header>
+
+  <form
+    ngNativeValidate
+    class="register-form"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSignUp()"
+  >
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Enter your username</mat-label>
+      <input
+        type="text"
+        name="username"
+        autocomplete="username"
+        matInput
+        formControlName="username"
+        minlength="3"
+        required
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        [attr.aria-label]="'Generate username'"
+        (click)="generateUsername($event)"
+      >
+        <mat-icon>casino</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Enter your email</mat-label>
+      <input
+        type="email"
+        autocomplete="email"
+        name="email"
+        matInput
+        formControlName="email"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Enter your password</mat-label>
+      <input
+        id="new-password"
+        name="new-password"
+        autocomplete="new-password"
+        minlength="6"
+        required
+        matInput
+        formControlName="password"
+        [type]="hidePassword() ? 'password' : 'text'"
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword()"
+        (click)="togglePasswordVisibility()"
+      >
+        <mat-icon>{{
+          hidePassword() ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button type="submit" mat-flat-button [disabled]="loading()">
+      {{ loading() ? "Signing up..." : "Sign up" }}
+    </button>
+  </form>
+  <a mat-button [routerLink]="['/login']">Already have an account? Log in</a>
+</div>

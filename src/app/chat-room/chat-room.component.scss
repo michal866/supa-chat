@@ -1,0 +1,124 @@
+.sidenav-wrapper {
+  height: 100%;
+}
+
+.room-list-sidenav {
+  width: clamp(250px, 25vw, 300px);
+  background-color: var(--mat-sys-surface-container);
+  // color: var(--mat-sys-on-surface-container);
+}
+
+.room-info-sidenav {
+  width: clamp(200px, 20vw, 400px);
+  background-color: var(--mat-sys-surface-container);
+  // color: var(--mat-sys-on-surface-container);
+}
+
+.conversation {
+  display: flex;
+  flex-direction: column;
+  height: inherit; // imp, 100% from mat-sidenav-content
+}
+
+.message-list-scrollable {
+  flex: 1;
+  overflow: auto;
+  padding-inline: 4vw;
+  scrollbar-width: none;
+}
+
+// single message row
+.message-with-username-container {
+  display: flex;
+  flex-direction: column;
+  margin-block-end: 0.15rem;
+  overflow-anchor: none;
+  // flex-grow: 1; // ?
+}
+
+.username-above-bubble {
+  font-size: 0.7rem;
+  margin-inline-start: 0.7rem;
+  margin-block-end: 0.5rem;
+}
+
+.message-bubble-container {
+  display: flex;
+  flex-direction: column;
+  max-width: min(80%, 600px);
+  word-break: break-word;
+}
+
+.text-message-bubble {
+  padding: 0.7rem;
+  border-radius: 1rem;
+  align-self: flex-start;
+  // white-space-collapse: preserve;
+  // white-space: pre-wrap;
+}
+
+.text-message-wrapper {
+  display: flex;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.message-text {
+  margin: 0;
+}
+
+.message-timestamp {
+  margin: 0;
+  margin-top: auto;
+  font-size: 0.7rem;
+  margin-left: auto;
+}
+
+.picture-message-bubble {
+  max-width: 350px;
+  height: auto;
+}
+
+.picture-message-bubble > img {
+  border-radius: 1rem;
+}
+
+.file-text-fields-wrapper {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: min-content auto;
+  align-items: center;
+  column-gap: 0.5rem;
+  padding-inline: 4vw;
+  padding-block: 1rem 2rem;
+}
+
+.text-msg-form-field {
+  width: 100%;
+}
+
+.send-text-btn {
+}
+
+.message-bubble-self {
+  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
+
+.message-bubble-incoming {
+  background-color: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+// https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
+#anchor {
+  /* allow the final child to be selected as an anchor node */
+  overflow-anchor: auto;
+
+  /* anchor nodes are required to have non-zero area */
+  height: 1px;
+}

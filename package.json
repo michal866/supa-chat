@@ -1,0 +1,48 @@
+{
+  "name": "chat",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^19.1.1",
+    "@angular/cdk": "^19.2.19",
+    "@angular/common": "^19.1.1",
+    "@angular/compiler": "^19.1.1",
+    "@angular/core": "^19.1.1",
+    "@angular/forms": "^19.1.1",
+    "@angular/material": "^19.2.19",
+    "@angular/platform-browser": "^19.1.1",
+    "@angular/platform-browser-dynamic": "^19.1.1",
+    "@angular/router": "^19.1.1",
+    "@ngx-dropzone/cdk": "^19.1.0",
+    "@ngx-dropzone/material": "^19.1.0",
+    "@supabase/supabase-js": "^2.95.3",
+    "material-icons": "^1.13.12",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.1.1",
+    "@angular/cli": "^19.1.1",
+    "@angular/compiler-cli": "^19.1.1",
+    "@types/jasmine": "~5.1.0",
+    "angular-eslint": "21.0.1",
+    "eslint": "^9.39.1",
+    "jasmine-core": "~5.4.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "3.8.1",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "8.46.4"
+  }
+}

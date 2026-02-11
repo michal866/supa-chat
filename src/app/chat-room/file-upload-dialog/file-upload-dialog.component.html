@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Upload files</h2>
+
+<mat-dialog-content>
+  <div class="file-upload-container">
+    <mat-form-field
+      class="file-upload-form-field"
+      appearance="outline"
+      subscriptSizing="dynamic"
+    >
+      <mat-label>Drop files here!</mat-label>
+      <ngx-mat-dropzone>
+        <input
+        type="file"
+        fileInput
+        multiple
+        [accept]="'image/*'"
+        [formControl]="fileUploadCtrl"
+        />
+        @for (file of fileUploadCtrl.value; track file.name) {
+          <mat-chip-row (removed)="removeFile($index)">
+            {{ file.name }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        }
+      </ngx-mat-dropzone>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="sendFiles()">Send files</button>
+</mat-dialog-actions>
